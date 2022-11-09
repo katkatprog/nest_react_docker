@@ -44,10 +44,7 @@ front-exec:
 # (4)/workspace_tmpを削除
 front-create-app:
 	docker-compose exec front sh -c \
-		"mkdir /workspace_tmp && cd /workspace_tmp && yarn create react-app --template typescript ${FRONT_PROJ_NAME} && \
-		cd ./${FRONT_PROJ_NAME} && rm -rf .git node_modules &&\
-		cd /workspace_tmp/${FRONT_PROJ_NAME} && mv * .[^\.]* /workspace/front/${FRONT_PROJ_NAME} && \
-		cd /workspace/front && rm -rf /workspace_tmp"
+		"yarn create vite ${FRONT_PROJ_NAME} --template react-ts"
 
 # front	イメージ削除
 front-rmi:

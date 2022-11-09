@@ -12,12 +12,12 @@ services:
       - .:/workspace
       - front_store:/workspace/front/$FRONT_PROJ_NAME/node_modules
     ports:
-      - "$FRONT_PORT:3000"
+      - "$FRONT_PORT:5173"
     # docker-compose起動時コマンド。プロジェクトディレクトリがある場合はアプリを起動し、ない場合はメッセージを出して待機
     command: >
       sh -c 
         "if [ -e $FRONT_PROJ_NAME/package.json ]; then 
-          cd $FRONT_PROJ_NAME && yarn install && yarn start
+          cd $FRONT_PROJ_NAME && yarn install && yarn dev --host
         else
           echo 'Project Directory is not found...' && tail -f /dev/null
         fi" 
