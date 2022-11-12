@@ -22,4 +22,3 @@ Makefile内コマンドを用いた諸々の操作方法は以下のとおりで
 - api(NestJS)のプロジェクト新規作成: make api-create-app
 - (注意)front, apiイメージを削除: make front-rmi / make api-rmi
 - (注意)各種volume削除: make front-rmvol / make api-rmvol / make db-rmvol
-- (注意)front,apiのimage削除、各種volume削除: make all-reset
