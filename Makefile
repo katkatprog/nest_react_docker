@@ -20,14 +20,6 @@ restart:
 build:
 	docker-compose build --no-cache
 
-# 環境の全リセット
-all-reset:
-	@make front-rmi
-	@make api-rmi
-	@make front-rmvol
-	@make api-rmvol
-	@make db-rmvol
-
 ########################################################################################
 ################################# frontに関するコマンド ######################################
 ########################################################################################
@@ -47,20 +39,6 @@ front-rmi:
 # front volume削除
 front-rmvol:
 	docker volume rm $(shell basename `pwd` | tr 'A-Z' 'a-z')_front_store
-
-# Next.jsプロジェクト新規作成
-# (1)/workspace/front(ホスト側の./front)のプロジェクト内のnode_modulesがVolume-Mountがされている関係上、
-# 	一時的にコンテナ内の/workspace_tmpにプロジェクトを作成、
-# (2)/workspace_tmpに作成したプロジェクトのファイルを、/workspace/frontのプロジェクトに移動させるが、
-# 	node_modules, .gitの移動は行いたくないので、移動前に削除。
-# (3)/workspace_tmpのプロジェクトから残ったファイルを/workspace/frontに移動。
-# (4)/workspace_tmpを削除
-# front-create-app:
-# 	docker-compose exec front sh -c \
-# 		"mkdir /workspace_tmp && cd /workspace_tmp && yarn create next-app --ts ${FRONT_PROJ_NAME} && \
-# 		cd ./${FRONT_PROJ_NAME} && rm -rf .git node_modules &&\
-# 		cd /workspace_tmp/${FRONT_PROJ_NAME} && mv * .[^\.]* /workspace/front/${FRONT_PROJ_NAME} && \
-# 		cd /workspace/front && rm -rf /workspace_tmp"
 
 ########################################################################################
 ################################# apiに関するコマンド #####################################
