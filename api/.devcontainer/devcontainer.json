@@ -18,11 +18,11 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"Prisma.prisma",
-				"esbenp.prettier-vscode",
 				"MS-CEINTL.vscode-language-pack-ja",
+				"mhutchie.git-graph",
+				"esbenp.prettier-vscode",
 				"dbaeumer.vscode-eslint",
-				"mhutchie.git-graph"
+				"Prisma.prisma"
 			]
 		}
 	},
