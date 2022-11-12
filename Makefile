@@ -21,7 +21,7 @@ build:
 ########################################### frontに関するコマンド ###########################################
 # frontコンテナにアクセス
 front-exec:
-	docker-compose exec front bash
+	docker-compose exec front ash
 
 # Reactプロジェクト新規作成
 front-create-app:
@@ -39,7 +39,7 @@ front-rmvol:
 ########################################### apiに関するコマンド ###########################################
 # apiコンテナ(NestJS)にアクセス
 api-exec:
-	docker-compose exec api bash
+	docker-compose exec api ash
 
 # NestJSプロジェクト新規作成
 api-create-app:
@@ -61,7 +61,7 @@ db-login:
 
 # dbコンテナにアクセス
 db-exec:
-	docker-compose exec db bash
+	docker-compose exec db ash
 
 # dbコンテナのvolume(データ保存場所)を削除
 db-rmvol:
