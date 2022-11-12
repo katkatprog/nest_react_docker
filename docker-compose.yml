@@ -21,14 +21,6 @@ services:
         else
           echo 'Project Directory is not found...' && tail -f /dev/null
         fi" 
-    depends_on:
-      - api
-  # entrypoint:
-  #   - dockerize
-  #   - -timeout
-  #   - 60s
-  #   - -wait
-  #   - tcp://api:$API_PORT
 
   api:
     build:
@@ -53,12 +45,6 @@ services:
         fi" 
     depends_on:
       - db
-  # entrypoint:
-  #   - dockerize
-  #   - -timeout
-  #   - 60s
-  #   - -wait
-  #   - tcp://db:$DB_PORT
 
   db:
     image: postgres:12
@@ -68,7 +54,6 @@ services:
       POSTGRES_DB: $DB_NAME
       POSTGRES_USER: $DB_USER
       POSTGRES_PASSWORD: $DB_PASS
-      # POSTGRES_ROOT_PASSWORD: $DB_ROOT_PASS
     volumes:
       - db_store:/var/lib/postgresql/data
     ports:
