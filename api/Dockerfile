@@ -4,5 +4,5 @@ WORKDIR ${API_WORKDIR}
 ENV TZ Asia/Tokyo
 RUN apk update
 RUN apk upgrade
-RUN apk add wget vim
+RUN apk add git vim
 RUN yarn global add @nestjs/cli
