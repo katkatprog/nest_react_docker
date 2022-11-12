@@ -36,12 +36,6 @@ front-exec:
 	docker-compose exec front bash
 
 # Reactプロジェクト新規作成
-# (1)/workspace/front(ホスト側の./front)のプロジェクト内のnode_modulesがVolume-Mountがされている関係上、
-# 	一時的にコンテナ内の/workspace_tmpにプロジェクトを作成、
-# (2)/workspace_tmpに作成したプロジェクトのファイルを、/workspace/frontのプロジェクトに移動させるが、
-# 	node_modules, .gitの移動は行いたくないので、移動前に削除。
-# (3)/workspace_tmpのプロジェクトから残ったファイルを/workspace/frontに移動。
-# (4)/workspace_tmpを削除
 front-create-app:
 	docker-compose exec front sh -c \
 		"yarn create vite ${FRONT_PROJ_NAME} --template react-ts"
