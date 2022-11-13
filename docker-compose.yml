@@ -60,7 +60,7 @@ services:
       - $DB_PORT:5432
 
   web:
-    image: nginx
+    image: nginx:alpine
     ports:
       - 80:80
     environment:
