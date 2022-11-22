@@ -23,10 +23,19 @@ build:
 front-exec:
 	docker-compose exec front ash
 
-# Reactプロジェクト新規作成
+# Next.jsプロジェクト新規作成
+# (1)/workspace/front(ホスト側の./front)のプロジェクト内のnode_modulesがVolume-Mountがされている関係上、
+# 	一時的にコンテナ内の/workspace_tmpにプロジェクトを作成、
+# (2)/workspace_tmpに作成したプロジェクトのファイルを、/workspace/frontのプロジェクトに移動させるが、
+# 	node_modules, .gitの移動は行いたくないので、移動前に削除。
+# (3)/workspace_tmpのプロジェクトから残ったファイルを/workspace/frontに移動。
+# (4)/workspace_tmpを削除
 front-create-app:
 	docker-compose exec front sh -c \
-		"yarn create vite ${FRONT_PROJ_NAME} --template react-ts"
+		"mkdir /workspace_tmp && cd /workspace_tmp && yarn create next-app --ts ${FRONT_PROJ_NAME} && \
+		cd ./${FRONT_PROJ_NAME} && rm -rf .git node_modules &&\
+		cd /workspace_tmp/${FRONT_PROJ_NAME} && mv * .[^\.]* /workspace/front/${FRONT_PROJ_NAME} && \
+		cd /workspace/front && rm -rf /workspace_tmp"
 
 # front	イメージ削除
 front-rmi:
@@ -53,6 +62,10 @@ api-rmi:
 # api volume削除
 api-rmvol:
 	docker volume rm $(shell basename `pwd` | tr 'A-Z' 'a-z')_api_store
+
+# api prisma studio起動
+api-prisma-studio:
+	docker-compose exec api sh -c "cd ${API_PROJ_NAME} && yarn prisma studio"
 
 ########################################### dbに関するコマンド ###########################################
 # dbコンテナのpostgres環境にログイン。先頭に@を付けることでコマンドがターミナル上に表示されなくなる
